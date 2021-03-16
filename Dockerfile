@@ -11,6 +11,8 @@ ENV POSTGRES_DB nodejsscan
 WORKDIR /usr/src/nodejsscan
 COPY requirements.txt .
 
+RUN adduser -D nodejsscan
+
 RUN apt update -y && apt install -y \
    git \
    python3.7 \
@@ -23,6 +25,10 @@ RUN apt update -y && apt install -y \
 
 COPY . .
 
+
 EXPOSE 9090
+
+
+USER nodejsscan
 
 CMD ["sh","entrypoint.sh"]
